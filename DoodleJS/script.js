@@ -384,8 +384,10 @@ function update(){
     }
     function game(){
         frame++;
+        ctx.clearRect(0,0,width,height);
+        //clears board
 
-        if(keys[38] || keys[32]){
+        if( keys[32]){
             started = true;
             sound.play();
         }
@@ -425,6 +427,21 @@ function update(){
                 sprite.src = 'playeralt.png';
                 //console.log( 'nega III ' + player.vX );
             }
+        }
+        if( keys[38] ){
+
+            //draw attack sprite for amount of time -> object?
+            //kill bullet within range
+
+            ctx.beginPath();
+
+            ctx.fillStyle = "#FFFFFF";
+
+            ctx.rect( player.x - player.width/2 , player.y  - 10 , player.width * 2 , 2 );
+
+            ctx.fill();
+
+            console.log('slice');
         }
 
         player.x += player.vX;
@@ -529,9 +546,6 @@ function update(){
     else if (player.x <= 0) {
         player.x = width-player.width;
     }
-
-    //clear the board
-    ctx.clearRect(0,0,width,height);
 
     // draw our player
     ctx.drawImage(sprite, player.x, player.y, player.width, player.height );
